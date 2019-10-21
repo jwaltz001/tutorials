@@ -14,13 +14,13 @@ function quickSort(arr, leftIndex=0, rightIndex=arr.length-1){
 	if (leftIndex < rightIndex) {
 		let pivotIndex = rightIndex;
 		//Math.floor(Math.random() * (rightIndex - leftIndex));
+
 		console.log("pivotIndex",pivotIndex, "pivotValue", arr[pivotIndex]);
 		const partitionIndex = partition(arr,pivotIndex,leftIndex,rightIndex);
 
 		quickSort(arr, leftIndex, partitionIndex-1);
 		quickSort(arr, partitionIndex + 1, rightIndex);
 	}
-	console.log("FINAL", arr);
 	return arr;
 };
 
@@ -77,7 +77,7 @@ function merge(arr1, arr2, n) {
     const myArray = [12,6,3,7,13,8];
     const sorted = quickSort(myArray);
     console.log("quick sorted", sorted)
-    // const otherArray = [-3, -1, 5, 100];
-    // const otherSorted = quickSort(otherArray);
-	// console.log("quick othersorted", otherSorted)
+    const otherArray = [-3, -1, 5, 100];
+    const otherSorted = quickSort(otherArray);
+	console.log("quick othersorted", otherSorted)
     // //[-3, -1, 5, 100]
