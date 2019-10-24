@@ -74,10 +74,64 @@ function merge(arr1, arr2, n) {
 		// [-3, -1, 5, 100]
 
 //Quick Sort
-    const myArray = [12,6,3,7,13,8];
-    const sorted = quickSort(myArray);
-    console.log("quick sorted", sorted)
-    const otherArray = [-3, -1, 5, 100];
-    const otherSorted = quickSort(otherArray);
-	console.log("quick othersorted", otherSorted)
+    // const myArray = [12,6,3,7,13,8];
+    // const sorted = quickSort(myArray);
+    // console.log("quick sorted", sorted)
+    // const otherArray = [-3, -1, 5, 100];
+    // const otherSorted = quickSort(otherArray);
+	// console.log("quick othersorted", otherSorted)
     // //[-3, -1, 5, 100]
+
+
+//DISTRIBUTION SORTS
+function bucketSort(arr){
+  // YOUR CODE HERE
+  //make buckets
+  	const lowArr = [],
+  	midArr = [],
+  	highArr = [];
+  // scatter numbers into set number of buckets
+
+	arr.forEach((i) => {
+		if (i < 5) {
+			lowArr.push(i);
+		}else if (i < 10) {
+			midArr.push(i);
+		}else{
+			highArr.push(i);
+		}
+	});
+	sorterHelper(lowArr);
+  //sort each bucket, simple comparison sort because of the small data set
+	function sorterHelper(arr){
+		const sortedArr = [];
+		if (arr.length == 1) {
+			return;
+		} else {
+			sortedArr.push(arr.shift());
+			const valueToInsert = arr.shift();
+			for (let i = 0; i < sortedArr.length; i++) {
+				if (arr.length > 0) {
+					//needs to be a for each for the sorted arr or another loop
+					if (valueToInsert < sortedArr[i]){
+						sortedArr.splice(i,0,valueToInsert);
+
+					}else if () {
+
+					}
+					valueToInsert = arr.shift();
+				}
+			}
+		}
+		console.log(sortedArr);
+	}
+  //combine buckets into new sorted array
+}
+// Test Script below
+
+    const myArray = [12,6,3,7,13,8];
+    const sorted = bucketSort(myArray);
+    //[3,6,7,8,12,13]
+    const otherArray = [-3, -1, 5, 100];
+    const otherSorted = bucketSort(otherArray);
+    //[-3, -1, 5, 100]
