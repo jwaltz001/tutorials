@@ -101,37 +101,50 @@ function bucketSort(arr){
 			highArr.push(i);
 		}
 	});
-	sorterHelper(lowArr);
-  //sort each bucket, simple comparison sort because of the small data set
-	function sorterHelper(arr){
-		const sortedArr = [];
-		if (arr.length == 1) {
-			return;
-		} else {
-			sortedArr.push(arr.shift());
-			const valueToInsert = arr.shift();
-			for (let i = 0; i < sortedArr.length; i++) {
-				if (arr.length > 0) {
-					//needs to be a for each for the sorted arr or another loop
-					if (valueToInsert < sortedArr[i]){
-						sortedArr.splice(i,0,valueToInsert);
+	//sort each bucket, simple comparison sort because of the small data set
+	console.log(lowArr, midArr, highArr);
+	const sortedLowArr = sorterHelper(lowArr);
+	const sortedMidArr = sorterHelper(midArr);
+	const sortedHighArr = sorterHelper(highArr);
+  //combine buckets into new sorted array
+	const arrToReturn = sortedLowArr.concat(sortedMidArr,sortedHighArr)
+	return arrToReturn;
+}
 
-					}else if () {
-
-					}
-					valueToInsert = arr.shift();
-				}
+function sorterHelper(array){
+	//get first value from original array and put into new array
+	const sortedArr = [array[0]];
+	console.log("1 sortedArr",sortedArr,"array",array);
+	//get value to compare from original array
+	//should do this for each value that is left in the original array
+	for (let i = 1; i < array.length; i++) {
+		//get next value to insert from original array
+		console.log("first", array.length, array[i]);
+		//run through the new array and find where it needs to be inserted
+		for (let j = 0; j < sortedArr.length; j++) {
+			console.log("second",sortedArr.length, sortedArr[j], "full array", sortedArr);
+			//if the value is less than any value in the new array, splice it into that spot
+			if (array[i] < sortedArr[j]){
+				sortedArr.splice(j,0,array[i]);
+				break;
+			} else {
+				//otherwise, push it on to the end of the array
+				sortedArr.push(array[i]);
+				break;
 			}
 		}
-		console.log(sortedArr);
 	}
-  //combine buckets into new sorted array
+	console.log("Return",sortedArr);
+	return sortedArr;
 }
+
 // Test Script below
 
     const myArray = [12,6,3,7,13,8];
     const sorted = bucketSort(myArray);
+	console.log('FINAL', sorted);
     //[3,6,7,8,12,13]
     const otherArray = [-3, -1, 5, 100];
     const otherSorted = bucketSort(otherArray);
+	console.log('FINAL', otherSorted);
     //[-3, -1, 5, 100]
